@@ -1,0 +1,26 @@
+# Temporary: diagnose the NaN failure on macOS arm64. Run it from the Actions tab.
+on:
+  workflow_dispatch:
+
+name: debug-nan
+
+permissions: read-all
+
+jobs:
+  debug:
+    runs-on: macos-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      TORCH_INSTALL: 1
+    steps:
+      - uses: actions/checkout@v4
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: local::.
+      - name: Install libtorch
+        run: Rscript -e 'if (!torch::torch_is_installed()) torch::install_torch()'
+      - name: Diagnose
+        run: Rscript .github/debug-nan.R

@@ -1,0 +1,38 @@
+Package: pinnr
+Type: Package
+Title: Physics-Informed Neural Networks in Native R with 'torch'
+Version: 0.1.0
+Authors@R:
+    person("Samson", "Obasanmi", email = "obasanmisamson722@gmail.com",
+           role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0009-6935-5479"))
+Description: Fits physics-informed neural networks (PINNs) that solve
+    ordinary and partial differential equations and estimate unknown
+    model parameters from data. Networks are trained by penalising the
+    equation residual, boundary and initial conditions, and misfit to
+    observations, following Raissi, Perdikaris and Karniadakis (2019)
+    <doi:10.1016/j.jcp.2018.10.045>. Everything runs in native R on top of
+    'torch', with no 'Python' dependency, and ordinary differential equation
+    models written as 'deSolve'-style derivative functions can be used
+    directly.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Depends:
+    R (>= 4.1.0)
+Imports:
+    torch (>= 0.13.0),
+    stats,
+    graphics,
+    grDevices,
+    utils
+Suggests:
+    deSolve,
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+VignetteBuilder: knitr
+Config/testthat/edition: 3
+URL: https://github.com/Obasanmii/pinnr
+BugReports: https://github.com/Obasanmii/pinnr/issues
+Roxygen: list(markdown = TRUE)
+Config/roxygen2/version: 8.1.1

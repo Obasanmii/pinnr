@@ -1,0 +1,28 @@
+cff-version: 1.2.0
+message: "If you use pinnr, please cite it as below."
+title: "pinnr: Physics-Informed Neural Networks in Native R with torch"
+version: 0.1.0
+date-released: 2026-10-28
+license: MIT
+repository-code: "https://github.com/Obasanmii/pinnr"
+authors:
+  - family-names: "Obasanmi"
+    given-names: "Samson"
+    email: "obasanmisamson722@gmail.com"
+    orcid: "https://orcid.org/0009-0009-6935-5479"
+references:
+  - type: article
+    title: "Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations"
+    authors:
+      - family-names: Raissi
+        given-names: Maziar
+      - family-names: Perdikaris
+        given-names: Paris
+      - family-names: Karniadakis
+        given-names: George Em
+    journal: "Journal of Computational Physics"
+    volume: 378
+    start: 686
+    end: 707
+    year: 2019
+    doi: "10.1016/j.jcp.2018.10.045"

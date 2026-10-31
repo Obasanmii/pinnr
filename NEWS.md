@@ -1,3 +1,12 @@
+# pinnr 0.1.1
+
+* Fixed intermittent `NaN` or wrong losses with `precision = "float64"`.
+  Coordinate and data tensors were built from one-column R matrices, which
+  `torch_tensor()` does not copy for double precision, so they could point to
+  memory that R had already freed. pinnr now always copies R data into
+  tensors. The failure was seen most often on Apple Silicon Macs.
+* README: Intel Macs on macOS 14 or older need torch 0.16.3 or earlier.
+
 # pinnr 0.1.0
 
 * First release.

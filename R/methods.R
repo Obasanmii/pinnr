@@ -270,7 +270,7 @@ restore_net <- function(obj) {
   dtype <- torch_dtype_from(s$precision)
   net$to(dtype = dtype)
   net$load_state_dict(lapply(obj$net_state, function(a) {
-    torch_tensor(a, dtype = dtype)
+    r_tensor(a, dtype = dtype)
   }))
   obj$net <- net
   obj$net_state <- NULL

@@ -1,7 +1,7 @@
 Package: pinnr
 Type: Package
 Title: Physics-Informed Neural Networks in Native R with 'torch'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R:
     person("Samson", "Obasanmi", email = "obasanmisamson722@gmail.com",
            role = c("aut", "cre"),

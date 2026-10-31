@@ -92,3 +92,14 @@ torch_dtype_from <- function(precision) {
 }
 
 fmt_num <- function(x) trimws(formatC(x, digits = 4, format = "g"))
+
+# Create a tensor from R data that owns its memory.
+# torch_tensor() can return a tensor that points into the R object instead of
+# copying it -- for example an n x 1 double matrix with dtype float64 -- and
+# the tensor then reads freed memory once R garbage-collects the object. This
+# gave intermittent NaN or wrong losses with precision = "float64".
+r_tensor <- function(x, dtype, device = NULL, requires_grad = FALSE) {
+  t <- torch_tensor(x, dtype = dtype, device = device)$clone()
+  if (requires_grad) t$requires_grad_(TRUE)
+  t
+}

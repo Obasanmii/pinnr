@@ -133,7 +133,7 @@ pinn_fit <- function(problem, hidden = c(32, 32, 32), activation = "tanh",
   unk <- problem$unknown
   theta <- lapply(names(unk$init), function(k) {
     v <- if (unk$positive[[k]]) log(unk$init[[k]]) else unk$init[[k]]
-    torch_tensor(v, dtype = dtype, device = dev, requires_grad = TRUE)
+    r_tensor(v, dtype = dtype, device = dev, requires_grad = TRUE)
   })
   names(theta) <- names(unk$init)
   params_now <- function() {
@@ -360,8 +360,8 @@ build_model <- function(problem, net, dtype, dev) {
 
   to_coords <- function(df, grad = TRUE) {
     out <- lapply(vars, function(v) {
-      torch_tensor(matrix(as.numeric(df[[v]]), ncol = 1), dtype = dtype,
-                   device = dev, requires_grad = grad)
+      r_tensor(matrix(as.numeric(df[[v]]), ncol = 1), dtype = dtype,
+               device = dev, requires_grad = grad)
     })
     stats::setNames(out, vars)
   }
@@ -391,7 +391,7 @@ build_model <- function(problem, net, dtype, dev) {
     if (is.null(d)) return(NULL)
     obs <- intersect(outs, names(d))
     col <- function(x) {
-      torch_tensor(matrix(x, ncol = 1), dtype = dtype, device = dev)
+      r_tensor(matrix(x, ncol = 1), dtype = dtype, device = dev)
     }
     list(
       coords = to_coords(d, grad = FALSE),
@@ -409,7 +409,7 @@ build_model <- function(problem, net, dtype, dev) {
 
   msq <- function(r) {
     if (is_tensor(r)) return(r$pow(2)$mean())
-    torch_tensor(mean(as.numeric(r)^2), dtype = dtype, device = dev)
+    r_tensor(mean(as.numeric(r)^2), dtype = dtype, device = dev)
   }
   mean_terms <- function(rs) Reduce(`+`, lapply(rs, msq)) / length(rs)
 

@@ -43,6 +43,10 @@ remotes::install_github("Obasanmii/pinnr")
 torch::install_torch()   # once, if you have not used torch before
 ```
 
+On Intel Macs running macOS 14 or older, torch 0.17.0 cannot load its
+backend (its Intel build of LibTorch requires macOS 15). Install torch 0.16.3
+instead, then run `torch::install_torch()`.
+
 ## Example: estimating epidemic parameters
 
 ```r

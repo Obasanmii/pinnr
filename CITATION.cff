@@ -1,9 +1,10 @@
 cff-version: 1.2.0
 message: "If you use pinnr, please cite it as below."
 title: "pinnr: Physics-Informed Neural Networks in Native R with torch"
-version: 0.1.0
-date-released: 2026-10-28
+version: 0.1.1
+date-released: 2026-10-31
 license: MIT
+doi: 10.5281/zenodo.23835717
 repository-code: "https://github.com/Obasanmii/pinnr"
 authors:
   - family-names: "Obasanmi"

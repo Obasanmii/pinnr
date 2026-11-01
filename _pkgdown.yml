@@ -1,0 +1,32 @@
+url: https://obasanmii.github.io/pinnr/
+
+template:
+  bootstrap: 5
+
+navbar:
+  structure:
+    left: [intro, reference, news]
+    right: [search, github]
+
+reference:
+  - title: Define a problem
+    contents:
+      - pinn_ode
+      - pinn_problem
+      - pinn_domain
+      - conditions
+  - title: Train
+    contents:
+      - pinn_fit
+      - pinn_mlp
+      - pinn_sample
+  - title: Inspect and save a fit
+    contents:
+      - predict.pinn_fit
+      - residuals.pinn_fit
+      - coef.pinn_fit
+      - plot.pinn_fit
+      - pinn_save
+  - title: Package
+    contents:
+      - pinnr-package

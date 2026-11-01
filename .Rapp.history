@@ -1,0 +1,111 @@
+install.packages(c("torch", "deSolve", "remotes", "devtools", "testthat", "knitr", "rmarkdown"))
+torch::install_torch()
+yes
+torch::torch_tensor(1:3)
+q()
+remove.packages("torch")
+options(timeout = 600)#
+install.packages("torch", repos = "https://torch-cdn.mlverse.org/packages/cpu/0.16.3/")
+q()
+library(torch)
+remove.packages("torch")
+q()
+remotes::install_version("torch", version = "0.16.3", repos = "https://cloud.r-project.org")
+tmp <- tempfile(); dir.create(tmp)#
+tgz <- file.path(tmp, "torch_0.16.3.tar.gz")#
+download.file("https://cloud.r-project.org/src/contrib/Archive/torch/torch_0.16.3.tar.gz", tgz)#
+untar(tgz, exdir = tmp)#
+#
+f <- file.path(tmp, "torch", "src", "indexing.cpp")#
+x <- readLines(f)#
+x <- sub("Rf_findVarInFrame(env, R_DotsSymbol)",#
+         "R_getVarEx(R_DotsSymbol, env, FALSE, R_NilValue)", x, fixed = TRUE)#
+stopifnot(any(grepl("R_getVarEx", x)))   # confirms the patch applied#
+writeLines(x, f)#
+#
+install.packages(file.path(tmp, "torch"), repos = NULL, type = "source")
+torch::install_torch()
+q()
+library(torch)
+torch_tensor(1:3)
+devtools::check("~/Desktop/pinnr", vignettes = FALSE)
+setwd("~/Desktop/pinnr")#
+usethis::use_roxygen_md()         # adds "Roxygen: list(markdown = TRUE)" to DESCRIPTION#
+devtools::document()              # rebuilds all files in man/#
+devtools::check(vignettes = FALSE)
+devtools::document()
+devtools::document()
+devtools::check(vignettes = FALSE)
+setwd("~/Desktop/pinnr")#
+files <- c("DESCRIPTION", "CITATION.cff", "README.md", "LICENSE", "LICENSE.md")#
+for (f in files) {#
+  x <- readLines(f, warn = FALSE)#
+  x <- gsub("Firstname", "Samson", x, fixed = TRUE)#
+  x <- gsub("Lastname", "Obasanmi", x, fixed = TRUE)#
+  x <- gsub("USERNAME", "Obasanmii", x, fixed = TRUE)#
+  x <- gsub("pinnr authors", "Samson Obasanmi", x, fixed = TRUE)#
+  writeLines(x, f)#
+}#
+devtools::document()
+grep("Firstname|Lastname|USERNAME|pinnr authors",#
+     unlist(lapply(list.files(".", recursive = TRUE, pattern = "\\.(R|Rd|md|cff)$|DESCRIPTION|LICENSE"), readLines)),#
+     value = TRUE)
+setwd("~/Desktop/pinnr")#
+#
+# DESCRIPTION: add ORCID to the author entry#
+d <- readLines("DESCRIPTION")#
+d <- sub('role = c("aut", "cre"))',#
+         'role = c("aut", "cre"),\n           comment = c(ORCID = "0009-0009-6935-5479"))',#
+         d, fixed = TRUE)#
+writeLines(d, "DESCRIPTION")#
+#
+# CITATION.cff: add ORCID under the author's email#
+cff <- readLines("CITATION.cff")#
+i <- grep('email: "ygwbtm@gmail.com"', cff, fixed = TRUE)#
+cff <- append(cff, '    orcid: "https://orcid.org/0009-0009-6935-5479"', after = i)#
+writeLines(cff, "CITATION.cff")#
+#
+devtools::document()
+desc::desc_get_authors()
+setwd("~/Desktop/pinnr") #
+new_email <- "obasanmisamson722@gmail.com" # change this #
+for (f in c("DESCRIPTION", "CITATION.cff")) { #
+     x <- readLines(f) #
+     x <- gsub("ygwbtm@gmail.com", new_email, x, fixed = TRUE) #
+     writeLines(x, f) #
+} #
+devtools::document() #
+desc::desc_get_authors()
+grep("ygwbtm|example.com", unlist(lapply(list.files(".", recursive = TRUE), readLines, warn = FALSE)), value = TRUE)
+devtools::check(vignettes = FALSE)
+setwd("~/Desktop/pinnr")#
+cat(".DS_Store\n", file = ".gitignore", append = TRUE)#
+#
+n <- readLines("NEWS.md")#
+n <- n[!n %in% c("# pinnr (development version)", "# pinnr 0.1.0", "* First release.")]#
+writeLines(c("# pinnr 0.1.0", "", "* First release.", n), "NEWS.md")
+library(torch)#
+x <- matrix(c(1, 2, 3), ncol = 1)#
+a <- torch_tensor(x, dtype = torch_float64())#
+b <- torch_tensor(x, dtype = torch_float64())#
+a$storage()$data_ptr() == b$storage()$data_ptr()
+a32 <- torch_tensor(x, dtype = torch_float32())#
+b32 <- torch_tensor(x, dtype = torch_float32())#
+a32$storage()$data_ptr() == b32$storage()$data_ptr()   # expect FALSE
+devtools::document("~/Desktop/pinnr")#
+devtools::check("~/Desktop/pinnr", vignettes = FALSE)
+setwd("~/Desktop/pinnr")#
+doi <- "10.5281/zenodo.23835717"#
+#
+# README: DOI badge next to the R-CMD-check badge#
+r <- readLines("README.md")#
+i <- grep("R-CMD-check.yaml/badge.svg", r, fixed = TRUE)#
+r <- append(r, sprintf("[![DOI](https://zenodo.org/badge/DOI/%s.svg)](https://doi.org/%s)", doi, doi), after = i)#
+writeLines(r, "README.md")#
+#
+# CITATION.cff: add the DOI and bring version/date up to date#
+cff <- readLines("CITATION.cff")#
+cff <- sub("^version: .*", "version: 0.1.1", cff)#
+cff <- sub("^date-released: .*", "date-released: 2026-10-31", cff)#
+cff <- append(cff, paste("doi:", doi), after = grep("^license:", cff))#
+writeLines(cff, "CITATION.cff")

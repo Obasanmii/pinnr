@@ -2,6 +2,7 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/Obasanmii/pinnr/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Obasanmii/pinnr/actions/workflows/R-CMD-check.yaml)
+[![R-universe](https://obasanmii.r-universe.dev/badges/pinnr)](https://obasanmii.r-universe.dev/pinnr)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23835717.svg)](https://doi.org/10.5281/zenodo.23835717)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://lifecycle.r-lib.org/articles/stages.html#experimental)
 <!-- badges: end -->
@@ -38,10 +39,19 @@ provides a general, R-native interface:
 
 ## Installation
 
+Install the pre-built package from R-universe:
+
+```r
+install.packages("pinnr", repos = c("https://obasanmii.r-universe.dev",
+                                    "https://cloud.r-project.org"))
+torch::install_torch()   # once, if you have not used torch before
+```
+
+or the development version from GitHub:
+
 ```r
 # install.packages("remotes")
 remotes::install_github("Obasanmii/pinnr")
-torch::install_torch()   # once, if you have not used torch before
 ```
 
 On Intel Macs running macOS 14 or older, torch 0.17.0 cannot load its
@@ -92,7 +102,7 @@ fit <- pinn_fit(heat, epochs = 5000)
 plot(fit, type = "solution")
 ```
 
-See `vignette("pinnr")` for a full walkthrough.
+See `vignette("pinnr")` or the [website](https://obasanmii.github.io/pinnr/) for a full walkthrough.
 
 ## Main functions
 

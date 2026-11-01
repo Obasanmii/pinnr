@@ -32,7 +32,7 @@ Suggests:
     testthat (>= 3.0.0)
 VignetteBuilder: knitr
 Config/testthat/edition: 3
-URL: https://github.com/Obasanmii/pinnr
+URL: https://obasanmii.github.io/pinnr/, https://github.com/Obasanmii/pinnr
 BugReports: https://github.com/Obasanmii/pinnr/issues
 Roxygen: list(markdown = TRUE)
 Config/roxygen2/version: 8.1.1

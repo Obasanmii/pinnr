@@ -72,7 +72,7 @@ fit
 #>   Outputs S, I, R on time in [0, 100]
 #>   Network 1-32-32-32-3, tanh activation
 #>   Time marching over 5 windows
-#>   Trained 5000 Adam steps per window in 409.4 s
+#>   Trained 5000 Adam steps per window in 235.4 s
 #>   Final loss (worst window) 4.735e-08 (residual 4.735e-08, conditions 0, data 0)
 ```
 
